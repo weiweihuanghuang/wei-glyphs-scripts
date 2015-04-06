@@ -6,9 +6,15 @@ Glyphs Scripts
 Some scripts for [Glyphs font editor](http://glyphsapp.com/) – tested with V2 beta only.
 
 Installation: follow [mekkablue's](https://github.com/mekkablue/) instructions for installing dependencies such as Robofab, Vanilla, etc.
-###About the Scripts---
-- **Uppercase** – Converts the selected text in a tab to uppercase.- **Lowercase** – Converts the selected text in a tab to lowercase.- **Zoom Wide** – Zooms the viewport to 50pts.
-####Metrics
+
+###About the Scripts
+---
+- **Uppercase** – Converts the selected text in a tab to uppercase.
+- **Lowercase** – Converts the selected text in a tab to lowercase.
+- **Zoom Wide** – Zooms the viewport to 50pts.
+
+
+####Metrics
 
 - **Adjust Kerning in Glyph** – Adjusts kerning values for a specified glyph by a specified amount *(edit the script manually to select glyph and adjustment amount)*.
 - **Delete Kerning Pairs In Text** – Deletes all selected kerning pairs present in selected text
@@ -22,7 +28,6 @@ Installation: follow [mekkablue's](https://github.com/mekkablue/) instructions f
 - **Show these in Context-Space** – Show selected items, each separated by /space, in spacing context in a new tab. i.e. selecting "av aw af fe" and running this script will put each pair in kerning context
 - **Sync All Metrics in All Masters**
 - **Unlink Metrics**
-
 - **kernMakerFunc.py** - The script that defines the context pattern (HOHnon etc) for kerning pairs for many of the above scripts.
 
 Metrics Type:
@@ -39,13 +44,21 @@ Smallcaps:
 - **Convert Kerning Groups to Small Caps** – Converts kerning groups to smallcaps. I.e. A > a.sc
 - **Convert Metric Keys to Small Caps** – Converts metrics key glyphs to smallcaps in all masters. I.e. =A > =a.sc
 
-####Masters:
+
+####Masters:
 
 - **Clear Every Master Layer** – Clears every master layer and places content in background.
 - **Copy Layer to All Layers** – Copies one master to every master layer in selected glyphs.
-- **Find and Delete Layers** – Find layers with the search string and deletes them.- **Find In Layer Names** – Find layers with the search string in them and creates a new tab with the glyphs (haven't yet figured out how to show the correct layer). Useful for finding [bracket layers](http://www.glyphsapp.com/tutorials/alternating-glyph-shapes).
-Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich Scheichelbauer](https://github.com/mekkablue/) for their help and for providing a great API and example scripts.###AppleScripts---
+- **Find and Delete Layers** – Find layers with the search string and deletes them.
+- **Find In Layer Names** – Find layers with the search string in them and creates a new tab with the glyphs (haven't yet figured out how to show the correct layer). Useful for finding [bracket layers](http://www.glyphsapp.com/tutorials/alternating-glyph-shapes).
+
+Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich Scheichelbauer](https://github.com/mekkablue/) for their help and for providing a great API and example scripts.
+
+###AppleScripts
+---
 These are AppleScripts that do exactly as they say. Assign them to a keyboard shortcut through Automator as a Service or with Fascripts (this is what I use, Automator seems to repeat the action if they keys are pressed a tiny bit too long), Quicksilver, etc.
 
-- Redo 10 times- Undo 10 times
-(These scripts could be used in any appliction actually)
+- Redo 10 times
+- Undo 10 times
+
+(These scripts could be used in any appliction actually)
