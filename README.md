@@ -5,7 +5,11 @@ Glyphs Scripts
 ---
 Some scripts for [Glyphs font editor](http://glyphsapp.com/) – tested with V2 beta only.
 
-Installation: follow [mekkablue's](https://github.com/mekkablue/) instructions for installing dependencies such as Robofab, Vanilla, etc.
+Put the scripts into the Scripts folder which appears when you choose Open Scripts Folder from the Scripts menu.
+
+For some scripts, you will also need to install Tal Leming's Vanilla. Here's how.
+
+In Glyphs 2.0 or later, go to Glyphs > Preferences > Addons > Scripts and click the Install Modules button. You are done and can skip the rest of these installation instructions.
 
 ###About the Scripts
 ---
