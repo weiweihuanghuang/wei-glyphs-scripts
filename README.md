@@ -47,7 +47,7 @@ Smallcaps:
 
 - **Convert Kerning Groups to Small Caps** – Converts kerning groups to smallcaps. I.e. A > a.sc
 - **Convert Metric Keys to Small Caps** – Converts metrics key glyphs to smallcaps in all masters. I.e. =A > =a.sc
-
+- **scCAPdict.py** - The dictionary that defines the small caps for 'Convert Metric Keys to Small Caps' – there's a better way to do this but this is how I do it at least now.
 
 ####Masters:
 
