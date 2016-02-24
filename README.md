@@ -3,7 +3,7 @@ Glyphs Scripts
 
 ###About
 ---
-Some scripts for [Glyphs font editor](http://glyphsapp.com/) – tested with V2 beta only.
+Some scripts for [Glyphs font editor](http://glyphsapp.com/) – tested with v2.3 only.
 
 Put the scripts into the Scripts folder which appears when you choose Open Scripts Folder from the Scripts menu.
 
@@ -11,11 +11,24 @@ For some scripts, you will also need to install Tal Leming's Vanilla. Here's how
 
 In Glyphs 2.0 or later, go to Glyphs > Preferences > Addons > Scripts and click the Install Modules button. You are done and can skip the rest of these installation instructions.
 
+Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich Scheichelbauer](https://github.com/mekkablue/) for their help and for providing a great API and example scripts.
+
 ###About the Scripts
 ---
+- **Compare Fonts** - Compare 2 open files and opens a new tab (in the current font) for each master showing the glyphs that are different between the 2 files. A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file. 
+- **Add Space Between Each Selected Glyph**
+- **Add [Placeholder](https://glyphsapp.com/tutorials/spacing) Between Each Selected Glyph**
+- **Set Transform Origin to Centre of Selection** - Sets origin point for Rotate tool to the centre of the selection. Works even if you select a single point!
 - **Uppercase** – Converts the selected text in a tab to uppercase.
 - **Lowercase** – Converts the selected text in a tab to lowercase.
 - **Zoom Wide** – Zooms the viewport to 50pts.
+
+
+####Anchors
+
+- **Find and Delete Anchors** – Find and deletes all anchors in active layers of selected glyphs that contains the search string.
+- **Delete All Anchors in All Masters of Selected Glyphs**
+- **Show Glyphs with this Anchor** - New Tab with all Glyphs that have the selected anchor.
 
 
 ####Metrics
@@ -31,7 +44,6 @@ In Glyphs 2.0 or later, go to Glyphs > Preferences > Addons > Scripts and click 
 - **Show this in Context** – Show selected text in spacing context in a new tab.
 - **Show these in Context-Space** – Show selected items, each separated by /space, in spacing context in a new tab. i.e. selecting "av aw af fe" and running this script will put each pair in kerning context
 - **Sync All Metrics in All Masters**
-- **Unlink Metrics**
 - **kernMakerFunc.py** - The script that defines the context pattern (HOHnon etc) for kerning pairs for many of the above scripts.
 
 Metrics Type:
@@ -43,12 +55,6 @@ Metrics Type:
 - **Show Manual Metrics**
 - **Show Non Automatic Alignment**
 
-Smallcaps:
-
-- **Convert Kerning Groups to Small Caps** – Converts kerning groups to smallcaps. I.e. A > a.sc
-- **Convert Metric Keys to Small Caps** – Converts metrics key glyphs to smallcaps in all masters. I.e. =A > =a.sc
-- **scCAPdict.py** - The dictionary that defines the small caps for 'Convert Metric Keys to Small Caps' – there's a better way to do this but this is how I do it at least now.
-
 ####Masters:
 
 - **Clear Every Master Layer** – Clears every master layer and places content in background.
@@ -56,7 +62,10 @@ Smallcaps:
 - **Find and Delete Layers** – Find layers with the search string and deletes them.
 - **Find In Layer Names** – Find layers with the search string in them and creates a new tab with the glyphs (haven't yet figured out how to show the correct layer). Useful for finding [bracket layers](http://www.glyphsapp.com/tutorials/alternating-glyph-shapes).
 
-Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich Scheichelbauer](https://github.com/mekkablue/) for their help and for providing a great API and example scripts.
+####Preview and Text Tabs
+- **Flip Edit Tab** - Flips the entire edit tab upside down- **Open Preview Panel** - Open preview panel for all tabs- **Set Preview Panel** - Set preview panel height and master across every tab to the same as this tab
+- **Set Same Master for Each Tab** - Set every tab to the same master as this one- **Set Same View Position for Each Tab** - Set every tab to the same view position as this one (also sets the preview panel height)
+
 
 ###AppleScripts
 ---

@@ -1,6 +1,6 @@
-#MenuTitle: Lowercase
+#MenuTitle: Case: Uppercase
 # -*- coding: utf-8 -*-
-"""Converts the selected text to lowercase."""
+"""Converts the selected text to upppercase."""
  
 Font = Glyphs.font
 Doc = Glyphs.currentDocument
@@ -17,8 +17,8 @@ if Range.length == 0:
 
 String = String.substringWithRange_(Range)
 
-def LowercaseString(String):
-	LowString = ""
+def UppercaseString(String):
+	UpperString = ""
 	for Char in String:
 		g = Font.glyphForCharacter_(ord(Char))
 		try:
@@ -32,16 +32,16 @@ def LowercaseString(String):
 					suffix = name[periodPos:]
 				LowerGlyph = Font.glyphForName_(baseName)
 				LowerString = u"%c" % int(LowerGlyph.unicode, 16)
-				LowerUnicode = "%0.4X" % ord(LowerString.lower()[0])
-				LowerGlyph = Font.glyphForUnicode_(LowerUnicode)
+				UpperUnicode = "%0.4X" % ord(LowerString.upper()[0])
+				UpperGlyph = Font.glyphForUnicode_(UpperUnicode)
 				# if suffix is not None:
-				# 	UpperName = LowerGlyph.name + suffix
-				# 	LowerGlyph = Font.glyphForName_(UpperName)
-				Char = unichr(Font.characterForGlyph_(LowerGlyph))
+				# 	UpperName = UpperGlyph.name + suffix
+				# 	UpperGlyph = Font.glyphForName_(UpperName)
+				Char = unichr(Font.characterForGlyph_(UpperGlyph))
 		except:
 			pass
-		LowString += Char
-	return LowString
+		UpperString += Char
+	return UpperString
 
-LowString = LowercaseString(String)
-TextStoreage.replaceCharactersInRange_withString_(Range, LowString)
+UpperString = UppercaseString(String)
+TextStoreage.replaceCharactersInRange_withString_(Range, UpperString)
