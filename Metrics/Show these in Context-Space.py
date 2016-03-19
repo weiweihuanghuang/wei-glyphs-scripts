@@ -5,41 +5,38 @@ Show selected items, each separated by /space, in spacing context in a new tab.
 """
 import GlyphsApp
 from PyObjCTools.AppHelper import callAfter
+import kernMakerFunc
+reload(kernMakerFunc)
 from kernMakerFunc import kernMaker
 
-Glyphs.clearLog()
+# Glyphs.clearLog()
 Font = Glyphs.font
 Doc = Glyphs.currentDocument
 selectedLayers = Font.selectedLayers
-selectedMaster = Font.selectedFontMaster
-masterID = selectedMaster.id
 
-editList = []
-editListItem = ""
+TextStoreage = Doc.windowController().activeEditViewController().graphicView().textStorage()
+String = TextStoreage.text().string()
+
 editString = ""
 
-for index, thisLayer in enumerate(selectedLayers):
-	thisGlyph = thisLayer.parent
-	if hasattr(thisGlyph, 'name'):
-		thisGlyphName = thisGlyph.name
-		if thisGlyphName != "space":
-			_thisGlyphName = "/" + thisGlyphName
-			editListItem += _thisGlyphName
-			# print editListItem
-			# if the next item is a space and is not the last one, add the editListItem to editList
-			if index != len(selectedLayers)-1 and hasattr(selectedLayers[index+1].parent, 'name') and selectedLayers[index+1].parent.name == "space": 
-				editList += [editListItem]
-				editListItem = ""
-		if index == (len(selectedLayers)-1) and thisGlyphName != "space": # when the item is the last one add the editListItem to editList
-			editList += [editListItem]
-			editListItem = ""
-	else: # if the glyph has no name add the editListItem to editList
-		if editListItem != "":
-			editList += [editListItem]
-			editListItem = ""
+# Get the name of each selected glyph and insert a '/space\n/space' for new line character instead (/space added to slit this into it's own item)
+namesOfSelectedGlyphs = ''.join([ "/%s" % l.parent.name if hasattr(l.parent, 'name') else '/space\n/space' for l in selectedLayers ])
+# namesOfSelectedGlyphs = ''.join([ "/%s" % l.parent.name for l in selectedLayers if hasattr(l.parent, 'name')])
+
+editList = namesOfSelectedGlyphs.split('/space')
+# Removed blank items which were added as a result of filtering out new line characters
+editList = filter(None, editList)
+
+print editList
 
 for eachItem in editList:
-	editString += kernMaker(eachItem, "lc")
+	if eachItem == u"\n":
+		editString += "\n"
+	else:
+		editString += kernMaker(eachItem)
+
+editString = "{0}\n{1}".format(String, editString)
 
 # print editString
-callAfter( Doc.windowController().addTabWithString_, editString )
+# callAfter( Doc.windowController().addTabWithString_, editString )
+Font.newTab(editString)
