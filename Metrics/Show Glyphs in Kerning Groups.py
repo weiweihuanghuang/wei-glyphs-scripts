@@ -5,7 +5,6 @@ Show all glyphs in the kerning groups of the selected glyph in a new tab.
 """
 
 import GlyphsApp
-from PyObjCTools.AppHelper import callAfter
 
 Doc = Glyphs.currentDocument
 Font = Glyphs.font
@@ -28,4 +27,4 @@ for l in selectedLayers:
 print allLeftGlyphs
 print allRightGlyphs
 
-callAfter( Doc.windowController().addTabWithString_, allLeftGlyphs + '\n' + allRightGlyphs )
+Font.newTab( allLeftGlyphs + '\n' + allRightGlyphs )

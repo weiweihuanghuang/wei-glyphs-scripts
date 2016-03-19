@@ -4,7 +4,8 @@ __doc__="""
 Show Kerning Pairs in context for the selected glyphs in a new tab.
 """
 import GlyphsApp
-from PyObjCTools.AppHelper import callAfter
+import kernMakerFunc
+reload(kernMakerFunc)
 from kernMakerFunc import kernMaker
 
 Font = Glyphs.font
@@ -47,4 +48,4 @@ for thisLayer in selectedLayers:
 			except:
 				pass
 
-callAfter( Doc.windowController().addTabWithString_, editString )
+Glyphs.font.newTab(editString)

@@ -4,7 +4,6 @@ __doc__="""
 Show Kerning Pairs for this glyph in a new tab.
 """
 import GlyphsApp
-from PyObjCTools.AppHelper import callAfter
 
 Font = Glyphs.font
 Doc = Glyphs.currentDocument
@@ -46,4 +45,4 @@ for thisLayer in selectedLayers:
 			except:
 				pass
 
-callAfter( Doc.windowController().addTabWithString_, editString )
+Font.newTab(editString)

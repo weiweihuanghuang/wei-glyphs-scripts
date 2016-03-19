@@ -4,7 +4,6 @@ __doc__="""
 Show All Kerning Pairs for this Master in a new tab
 """
 import GlyphsApp
-from PyObjCTools.AppHelper import callAfter
 
 Font = Glyphs.font
 Doc = Glyphs.currentDocument
@@ -28,4 +27,4 @@ for L in Font.kerning[ masterID ]:
 	except:
 		pass
 
-callAfter( Doc.windowController().addTabWithString_, editString )
+Glyphs.font.newTab(editString)

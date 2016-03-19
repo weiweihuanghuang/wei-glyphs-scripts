@@ -1,10 +1,11 @@
-#MenuTitle: Show All Kerning Pairs With searchString in Context
+#MenuTitle: Show All Kerning Pairs With searchString
 # -*- coding: utf-8 -*-
 __doc__="""
-Show All Kerning Pairs for this Master with searchString in a new tab in context
+Show All Kerning Pairs for this Master with searchString
 """
 import GlyphsApp
-from PyObjCTools.AppHelper import callAfter
+import kernMakerFunc
+reload(kernMakerFunc)
 from kernMakerFunc import kernMaker
 
 Glyphs.clearLog()
@@ -15,7 +16,7 @@ selectedMaster = Font.selectedFontMaster
 masterID = selectedMaster.id
 
 editString = ""
-searchString = u".sc"
+searchString = u"colon"
 kerningCount = 0
 
 def nameMaker(kernGlyph):
@@ -28,21 +29,21 @@ for L in Font.kerning[ masterID ]:
 	# print str(nameMaker(L))
 	try:
 		# if searchString is in L
-		if str(nameMaker(L)).endswith(searchString):
+		if str(nameMaker(L)) == searchString:
 			for R in Font.kerning[masterID][L]:
 				# print str(nameMaker(R))
 				kernPair = "/%s/%s" % (nameMaker(L), nameMaker(R))
-				editString += kernMaker(kernPair)
+				editString += kernPair + "  " # kernMaker(kernPair)
 				kerningCount += 1
 		# if searchString is in R
 		for R in Font.kerning[masterID][L]:
-			if str(nameMaker(R)).endswith(searchString):
+			if str(nameMaker(R)) == searchString:
 				kernPair = "/%s/%s" % (nameMaker(L), nameMaker(R))
-				editString += kernMaker(kernPair)
+				editString += kernPair + "  " # kernMaker(kernPair)
 				kerningCount += 1
 	except:
 		pass
 
-callAfter( Doc.windowController().addTabWithString_, editString )
+Font.newTab(editString)
 # print editString
 print "%s kerning pairs found" % kerningCount
