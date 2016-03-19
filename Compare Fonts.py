@@ -1,9 +1,9 @@
 #MenuTitle: Compare Fonts
 # -*- coding: utf-8 -*-
 __doc__="""
-- Compare 2 open files and opens a new tab (in the current font) for each master showing the glyphs that are different between the 2 files.
+- Compare 2 open files and opens a new tab (in both files) for each master showing the glyphs that are different between the 2 Files.
 
-- A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file. 
+- A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file.
 
 *** WARNING *** This will clear the background in the current font. Uncomment the "doNotCopyToBackground" line to disable it.
 
@@ -17,6 +17,20 @@ doNotCopyToBackground = 0
 
 # Uncomment the following line to disable the script from copying over the background.
 # doNotCopyToBackground = 1
+
+# Figure out which font is Glyphs.font and set thisFont as the file that is open
+if Glyphs.font.filepath == Glyphs.fonts[1].filepath:
+    thisFont = Glyphs.fonts[1]
+    otherFont = Glyphs.fonts[0]
+else:
+    thisFont = Glyphs.fonts[0]
+    otherFont = Glyphs.fonts[1]
+
+# close all tabs
+for i in range(len(thisFont.tabs)):
+    del thisFont.tabs[0]
+for i in range(len(otherFont.tabs)):
+    del otherFont.tabs[0]
 
 def copyPathsAndAnchorsFromLayerToLayer( sourceLayer, targetLayer ):
     # Copy Paths
@@ -85,13 +99,6 @@ for thisMasterIndex in range( len(Glyphs.fonts[0].masters) ):
     ## print "\n\tSame Glyphs\n%s" % sameGlyphsString
 
     if doNotCopyToBackground == 0:
-        # Figure out which font is Glyphs.font and set thisFont as the file that is open
-        if Glyphs.font.filepath == Glyphs.fonts[1].filepath:
-            thisFont = Glyphs.fonts[1]
-            otherFont = Glyphs.fonts[0]
-        else:
-            thisFont = Glyphs.fonts[0]
-            otherFont = Glyphs.fonts[1]
 
         # Add glyphs to background
         thisFontMasterID = thisFont.masters[thisMasterIndex].id
@@ -111,6 +118,11 @@ for thisMasterIndex in range( len(Glyphs.fonts[0].masters) ):
 
     # Open new tabs with different glphs
     if notSameGlyphsList != []:
-        Glyphs.font.newTab(notSameGlyphsString)
+
+        thisFont.newTab(notSameGlyphsString)
         # Change to the correct master
-        Glyphs.font.currentTab.setMasterIndex_(thisMasterIndex)
+        thisFont.currentTab.setMasterIndex_(thisMasterIndex)
+
+        otherFont.newTab(notSameGlyphsString)
+        # Change to the correct master
+        otherFont.currentTab.setMasterIndex_(thisMasterIndex)
