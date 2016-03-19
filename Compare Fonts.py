@@ -1,9 +1,9 @@
 #MenuTitle: Compare Fonts
 # -*- coding: utf-8 -*-
 __doc__="""
-- Compare 2 open files and opens a new tab (in both files) for each master showing the glyphs that are different between the 2 Files.
+- Compare 2 open files and opens a new tab (in the current font) for each master showing the glyphs that are different between the 2 files.
 
-- A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file.
+- A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file. 
 
 *** WARNING *** This will clear the background in the current font. Uncomment the "doNotCopyToBackground" line to disable it.
 
@@ -50,7 +50,7 @@ def copyPathsAndAnchorsFromLayerToLayer( sourceLayer, targetLayer ):
             targetLayer.anchors.append( newAnchor )
             # print "   %s (%i, %i)" % ( thisAnchor.name, thisAnchor.position.x, thisAnchor.position.y )
 
-for thisMasterIndex in range( len(Glyphs.fonts[0].masters) ):
+for thisMasterIndex in range( len(thisFont.masters) ):
 
     # fonts = AllFonts()
     # f1 = RFont(Glyphs.fonts[0])
@@ -83,14 +83,17 @@ for thisMasterIndex in range( len(Glyphs.fonts[0].masters) ):
         d2 = p2.getDigest()
 
         if d1 != d2:
-            notSameGlyphsList += [g]
+            notSameGlyphsList += [str(g)]
             if d1 == () or d2 == ():
-                blankGlyphsList += [g]
+                blankGlyphsList += [str(g)]
         else:
-            sameGlyphsList += [g]
+            sameGlyphsList += [str(g)]
+
+    # Sort the lists
+    notSameGlyphsListSorted = [g.name for g in thisFont.glyphs if g.name in notSameGlyphsList]
 
     blankGlyphsString = '/{0}'.format('/'.join(blankGlyphsList))
-    notSameGlyphsString = '/{0}'.format('/'.join(notSameGlyphsList))
+    notSameGlyphsString = '/{0}'.format('/'.join(notSameGlyphsListSorted))
     sameGlyphsString = '/{0}'.format('/'.join(sameGlyphsList))
 
     print "\n%s" % Glyphs.fonts[0].masters[thisMasterIndex].name
