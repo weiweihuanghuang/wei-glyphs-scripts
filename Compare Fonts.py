@@ -19,12 +19,15 @@ doNotCopyToBackground = 0
 # doNotCopyToBackground = 1
 
 # Figure out which font is Glyphs.font and set thisFont as the file that is open
-if Glyphs.font.filepath == Glyphs.fonts[1].filepath:
-    thisFont = Glyphs.fonts[1]
-    otherFont = Glyphs.fonts[0]
-else:
-    thisFont = Glyphs.fonts[0]
-    otherFont = Glyphs.fonts[1]
+# if Glyphs.font.filepath == Glyphs.fonts[1].filepath:
+    # thisFont = Glyphs.fonts[1]
+    # otherFont = Glyphs.fonts[0]
+# else:
+    # thisFont = Glyphs.fonts[0]
+    # otherFont = Glyphs.fonts[1]
+
+thisFont = Glyphs.fonts[0]
+otherFont = Glyphs.fonts[1]
 
 # close all tabs
 for i in range(len(thisFont.tabs)):
@@ -105,15 +108,16 @@ for thisMasterIndex in range( len(thisFont.masters) ):
 
         # Add glyphs to background
         thisFontMasterID = thisFont.masters[thisMasterIndex].id
+        otherFontMasterID = otherFont.masters[thisMasterIndex].id
 
         for thisGlyphName in notSameGlyphsList:
             # if thisGlyphName not in blankGlyphsList:
 
             # Get the current layer for the current glyph
-            thisLayerInOtherFont = otherFont.glyphs[thisGlyphName].layerForKey_(thisFontMasterID)
             thisLayerInThisFont = thisFont.glyphs[thisGlyphName].layerForKey_(thisFontMasterID)
+            thisLayerInOtherFont = otherFont.glyphs[thisGlyphName].layerForKey_(otherFontMasterID)
             thisGlyphInThisFontLayerBackground = thisLayerInThisFont.background
-            sourceLayer = otherFont.glyphs[thisGlyphName].layerForKey_(thisFontMasterID).copyDecomposedLayer()
+            sourceLayer = otherFont.glyphs[thisGlyphName].layerForKey_(otherFontMasterID).copyDecomposedLayer()
 
             # Clear the background and copy the paths, components and anchors
             thisLayerInThisFont.background.clear()
