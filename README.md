@@ -17,11 +17,12 @@ Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich S
 ---
 - **Compare Fonts** - Compare 2 open files and opens a new tab (in the current font) for each master showing the glyphs that are different between the 2 files. A decomposed copy of each different glyph from the other file will also be pasted in the background of each glyph in the current file. 
 - **Add Space Between Each Selected Glyph**
+- **Add String Between Each Selected Glyph** - Adds this string between each selected glyph, must be in /slash format
 - **Add [Placeholder](https://glyphsapp.com/tutorials/spacing) Between Each Selected Glyph**
 - **Set Transform Origin to Centre of Selection** - Sets origin point for Rotate tool to the centre of the selection. Works even if you select a single point!
 - **Uppercase** – Converts the selected text in a tab to uppercase.
 - **Lowercase** – Converts the selected text in a tab to lowercase.
-- **Zoom Wide** – Zooms the viewport to 50pts.
+- **Zoom Wide** – Zooms the viewport to 50pts.- )
 
 
 ####Anchors
