@@ -20,6 +20,7 @@ Thanks to [Georg Seifert](https://github.com/schriftgestalt) and [Rainer Erich S
 - **Add String Between Each Selected Glyph** - Adds this string between each selected glyph, must be in /slash format
 - **Add [Placeholder](https://glyphsapp.com/tutorials/spacing) Between Each Selected Glyph**
 - **Set Transform Origin to Centre of Selection** - Sets origin point for Rotate tool to the centre of the selection. Works even if you select a single point!
+- **Name This** - Add a label for this guideline, anchor, point
 - **Uppercase** – Converts the selected text in a tab to uppercase.
 - **Lowercase** – Converts the selected text in a tab to lowercase.
 - **Zoom Wide** – Zooms the viewport to 50pts.- )
