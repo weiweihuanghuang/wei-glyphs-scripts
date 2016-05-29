@@ -23,7 +23,7 @@ class nameThisPoint(object):
 
 		# Load Settings:
 		if not self.LoadPreferences():
-			print "Note: 'Adjust Kerning in Master' could not load preferences. Will resort to defaults"
+			print "Note: 'Name This' could not load preferences. Will resort to defaults"
 
 		self.w.open()
 		self.w.makeKey()
@@ -42,7 +42,7 @@ class nameThisPoint(object):
 		try:
 			NSUserDefaults.standardUserDefaults().registerDefaults_(
 				{
-					"com.wwhh.FindAnchors.namethispoint": ""
+					"com.wwhh.namethispoint.namethispoint": ""
 				}
 			)
 			self.w.pointName.set( Glyphs.defaults["com.wwhh.namethispoint.pointName"] )
