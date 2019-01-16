@@ -15,9 +15,11 @@ editString = u""""""
 
 def nameMaker(kernGlyph):
 	if kernGlyph[0] == "@":
-		return kernGlyph[7:]
+		for thisGlyph in Font.glyphs:
+			if thisGlyph.rightKerningKey == kernGlyph or thisGlyph.leftKerningKey == kernGlyph:
+				return thisGlyph.name
 	else:
-		return Font.glyphForId_(kernGlyph).name	
+		return Font.glyphForId_(kernGlyph).name
 
 for thisLayer in selectedLayers:
 	thisGlyph = thisLayer.parent
@@ -44,5 +46,4 @@ for thisLayer in selectedLayers:
 					editString += kernPair
 			except:
 				pass
-
 Font.newTab(editString)
