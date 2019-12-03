@@ -1,7 +1,7 @@
-#MenuTitle: Sync All Metircs in All Masters
+#MenuTitle: Sync All Metrics in All Masters
 # -*- coding: utf-8 -*-
 __doc__="""
-Sync All Metircs in All Masters.
+Sync All Metrics in All Masters.
 """
 
 import GlyphsApp
