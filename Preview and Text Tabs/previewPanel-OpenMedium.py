@@ -1,4 +1,4 @@
-#MenuTitle: Open Preview Panel
+#MenuTitle: Open Preview Panel Medium
 # -*- coding: utf-8 -*-
 __doc__="""
 Open preview panel for all tabs
@@ -6,9 +6,7 @@ Open preview panel for all tabs
 import GlyphsApp
 Font = Glyphs.font
 
-# from Foundation import NSPoint, NSValue
-
-frameHeight = 160
+frameHeight = 80
 # frameHeight = 69
 
 # for eachTab in Font.tabs:
@@ -19,5 +17,3 @@ frameHeight = 160
 Glyphs.defaults["GSPreviewHeight"] = frameHeight
 for eachTab in Font.tabs:
 	eachTab.previewHeight = frameHeight
-	# eachTab.previewView().setValue_forKey_(NSValue.valueWithPoint_(NSPoint(0,0)), "userOffset")
-	# eachTab.previewView().setNeedsDisplay_(True)
