@@ -12,9 +12,9 @@ selectedLayers = thisFont.selectedLayers
 selectedMaster = thisFont.selectedFontMaster
 masterID = selectedMaster.id
 
-kernDict = thisFont.kerningDict()
 leftGroups = {}
 rightGroups = {}
+
 for g in thisFont.glyphs:
 	if g.rightKerningGroup:
 		group_name = g.rightKerningGroupId()
@@ -64,19 +64,19 @@ kernPairListSortedL = []
 kernPairListR = []
 kernPairListSortedR = []
 
-for L in thisFont.kerning[ masterID ]:
+for L in thisFont.kerning[ masterID ].keys():
 	try:
 		# if the this kerning-pair's left glyph matches rGroupName (right side kerning group of thisGlyph)
 		if rGroupName == L[7:] or rGroupName == thisFont.glyphForId_(L).name or thisFont.glyphForId_(L).name == thisGlyph.name:
 			# for every R counterpart to L in the kerning pairs of rGroupName
-			for R in thisFont.kerning[masterID][L]:
+			for R in thisFont.kerning[masterID][L].keys():
 				if thisFont.kerning[masterID][L][R] != 0:
 					kernPairListL += [nameMaker(R, "right")]
 	except:
 		# print traceback.format_exc()
 		pass
 
-	for R in thisFont.kerning[masterID][L]:
+	for R in thisFont.kerning[masterID][L].keys():
 		try:
 			# if the R counterpart (class glyph) of L glyph is the selectedGlyph
 			if lGroupName == R[7:] or lGroupName == thisFont.glyphForId_(R).name or thisFont.glyphForId_(R).name == thisGlyph.name:

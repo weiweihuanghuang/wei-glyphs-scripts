@@ -52,12 +52,12 @@ def nameMaker(kernGlyphOrGroup, side):
 		return thisFont.glyphForId_(kernGlyphOrGroup).name
 
 
-for L in thisFont.kerning[ masterID ]:
+for L in thisFont.kerning[ masterID ].keys():
 	# L @R, L R
 	# if this is L glyph kerning and L does have a rightKerningGroup (i.e. it is an exception)
 	if L[0] != "@":
 		if thisFont.glyphs[thisFont.glyphForId_(L).name].rightKerningGroup != None:
-			for R in thisFont.kerning[masterID][L]:
+			for R in thisFont.kerning[masterID][L].keys():
 
 				# L R
 				if R[0] != "@":
@@ -74,7 +74,7 @@ for L in thisFont.kerning[ masterID ]:
 
 	# @L R
 	else:
-		for R in thisFont.kerning[masterID][L]:
+		for R in thisFont.kerning[masterID][L].keys():
 			# if this is R glyph kerning but R does have a leftKerningGroup (i.e. it is an exception)
 			if R[0] != "@":
 				if thisFont.glyphs[thisFont.glyphForId_(R).name].leftKerningGroup != None:

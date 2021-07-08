@@ -48,7 +48,7 @@ for thisGlyphName in namesOfSelectedGlyphs:
 	rGroupName = str(thisGlyph.rightKerningGroup)
 	lGroupName = str(thisGlyph.leftKerningGroup)
 
-	for L in thisFont.kerning[ masterID ]:
+	for L in thisFont.kerning[ masterID ].keys():
 		try:
 			# If L matches thisGlyph or its right side group
 			# @L R
@@ -64,7 +64,7 @@ for thisGlyphName in namesOfSelectedGlyphs:
 			# L @R, L R
 			if thisFont.glyphForId_(L).name == thisGlyph.name:
 				# for every R counterpart to L in the kerning pairs of rGroupName
-				for R in thisFont.kerning[masterID][L]:
+				for R in thisFont.kerning[masterID][L].keys():
 					if thisFont.kerning[masterID][L][R] < 8e+10:
 						# print "L: L @R, L R\t", L, R
 						# print "\t", "%s, %s" % (thisGlyphName, nameMaker(R, "right"))
@@ -73,7 +73,7 @@ for thisGlyphName in namesOfSelectedGlyphs:
 		except:
 			pass
 
-		for R in thisFont.kerning[masterID][L]:
+		for R in thisFont.kerning[masterID][L].keys():
 			try:
 				# If R matches thisGlyph or its left side group
 				# L @R
