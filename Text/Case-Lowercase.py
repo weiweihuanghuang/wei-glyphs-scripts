@@ -37,7 +37,7 @@ def LowercaseString(String):
 				# if suffix is not None:
 				# 	UpperName = LowerGlyph.name + suffix
 				# 	LowerGlyph = Font.glyphForName_(UpperName)
-				Char = unichr(Font.characterForGlyph_(LowerGlyph))
+				Char = chr(Font.characterForGlyph_(LowerGlyph))
 		except:
 			pass
 		LowString += Char

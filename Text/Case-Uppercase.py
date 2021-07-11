@@ -37,9 +37,14 @@ def UppercaseString(String):
 				# if suffix is not None:
 				# 	UpperName = UpperGlyph.name + suffix
 				# 	UpperGlyph = Font.glyphForName_(UpperName)
-				Char = unichr(Font.characterForGlyph_(UpperGlyph))
-		except:
-			pass
+				Char = chr(Font.characterForGlyph_(UpperGlyph))
+		except Exception as e:
+			Glyphs.showMacroWindow()
+			print("\n⚠️ Script Error:\n")
+			import traceback
+			print(traceback.format_exc())
+			print()
+			raise e
 		UpperString += Char
 	return UpperString
 
