@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 __doc__="""
 Show All Kerning Pairs for this Master in a new tab
-Based on Wei's Script: Show All Kerning Pairs
 """
 import GlyphsApp
 
