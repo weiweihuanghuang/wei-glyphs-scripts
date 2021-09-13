@@ -1,7 +1,8 @@
-#MenuTitle: Show All Kerning Pairσ
+#MenuTitle: Show All Kerning Pairs in Current Master
 # -*- coding: utf-8 -*-
 __doc__="""
 Show All Kerning Pairs for this Master in a new tab
+Based on Wei's Script: Show All Kerning Pairs
 """
 import GlyphsApp
 
