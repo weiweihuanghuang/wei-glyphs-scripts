@@ -14,7 +14,6 @@ masterID = selectedMaster.id
 
 editString = u""""""
 
-kernDict = thisFont.kerningDict()
 leftGroups = {}
 rightGroups = {}
 for g in thisFont.glyphs:

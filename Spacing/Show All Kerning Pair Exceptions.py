@@ -15,7 +15,6 @@ editString = u""""""
 errorString = u""""""
 
 
-kernDict = thisFont.kerningDict()
 leftGroups = {}
 rightGroups = {}
 for g in thisFont.glyphs:
@@ -96,5 +95,5 @@ for L in thisFont.kerning[ masterID ].keys():
 		# Left side of @R
 
 thisFont.newTab(editString)
-print "The following kerning pairs had a group without glyphs in the kerning group:"
-print errorString
+print("The following kerning pairs had a group without glyphs in the kerning group:")
+print(errorString)

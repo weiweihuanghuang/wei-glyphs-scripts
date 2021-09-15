@@ -15,24 +15,40 @@ namesOfSelectedGlyphs = [i for i in namesOfSelectedGlyphs if i != "/space"]
 selectedMaster = thisFont.selectedFontMaster
 masterID = selectedMaster.id
 
-# Look for:
-	# New Tab for every glyph
-# to make it every glyph new tab
+leftGroups = {}
+rightGroups = {}
+for g in thisFont.glyphs:
+	if g.rightKerningGroup:
+		group_name = g.rightKerningGroupId()
+		try:
+			leftGroups[group_name].append(g.name)
+		except:
+			leftGroups[group_name] = [g.name]
 
+	if g.leftKerningGroup:
+		group_name = g.leftKerningGroupId()
+		try:
+			rightGroups[group_name].append(g.name)
+		except:
+			rightGroups[group_name] = [g.name]
 
 def nameMaker(kernGlyphOrGroup, side):
 	# if this is a kerning group
 	if kernGlyphOrGroup[0] == "@":
-		for g in thisFont.glyphs:
-			# right glyph
-			if side == "right":
-				# left side of right glyph
-				if g.leftKerningGroup == kernGlyphOrGroup[7:]:
-					return g.name
-			if side == "left":
-				# right side of left glyph
-				if g.rightKerningGroup == kernGlyphOrGroup[7:]:
-					return g.name
+		# right glyph, left kerning group
+		if side == "right":
+			try:
+				# return rightGroups[kernGlyphOrGroup][0]
+				return sorted(rightGroups[kernGlyphOrGroup], key=len)[0]
+			except:
+				pass
+		elif side == "left":
+			# left glyph, right kerning group
+			try:
+				# return leftGroups[kernGlyphOrGroup][0]
+				return sorted(leftGroups[kernGlyphOrGroup], key=len)[0]
+			except:
+				pass
 	else:
 		return thisFont.glyphForId_(kernGlyphOrGroup).name
 

@@ -4,22 +4,54 @@ __doc__="""
 Show Kerning Pairs for this glyph in a new tab.
 """
 import GlyphsApp
+import traceback
 
-Font = Glyphs.font
+thisFont = Glyphs.font
 Doc = Glyphs.currentDocument
-selectedLayers = Font.selectedLayers
-selectedMaster = Font.selectedFontMaster
+selectedLayers = thisFont.selectedLayers
+selectedMaster = thisFont.selectedFontMaster
 masterID = selectedMaster.id
 
-editString = u""""""
-editStringL = u"""L: """
-editStringR = u"""R: """
+leftGroups = {}
+rightGroups = {}
+for g in thisFont.glyphs:
+	if g.rightKerningGroup:
+		group_name = g.rightKerningGroupId()
+		try:
+			leftGroups[group_name].append(g.name)
+		except:
+			leftGroups[group_name] = [g.name]
 
-def nameMaker(kernGlyph):
-	if kernGlyph[0] == "@":
-		return kernGlyph[7:]
+	if g.leftKerningGroup:
+		group_name = g.leftKerningGroupId()
+		try:
+			rightGroups[group_name].append(g.name)
+		except:
+			rightGroups[group_name] = [g.name]
+
+def nameMaker(kernGlyphOrGroup, side):
+	# if this is a kerning group
+	if kernGlyphOrGroup[0] == "@":
+		# right glyph, left kerning group
+		if side == "right":
+			try:
+				# return rightGroups[kernGlyphOrGroup][0]
+				return sorted(rightGroups[kernGlyphOrGroup], key=len)[0]
+			except:
+				pass
+		elif side == "left":
+			# left glyph, right kerning group
+			try:
+				# return leftGroups[kernGlyphOrGroup][0]
+				return sorted(leftGroups[kernGlyphOrGroup], key=len)[0]
+			except:
+				pass
 	else:
-		return Font.glyphForId_(kernGlyph).name	
+		return thisFont.glyphForId_(kernGlyphOrGroup).name
+
+editString = u""""""
+editStringL = u""""""
+editStringR = u""""""
 
 for thisLayer in selectedLayers:
 	thisGlyph = thisLayer.parent
@@ -27,28 +59,42 @@ for thisLayer in selectedLayers:
 	rGroupName = str(thisGlyph.rightKerningGroup)
 	lGroupName = str(thisGlyph.leftKerningGroup)
 
-	for L in Font.kerning[ masterID ].keys():
+	# print "\t", rGroupName, lGroupName
+
+	kernPairListL = []
+	kernPairListSortedL = []
+	kernPairListR = []
+	kernPairListSortedR = []
+
+	for L in thisFont.kerning[ masterID ].keys():
 		try:
 			# if the this kerning-pair's left glyph matches rGroupName (right side kerning group of thisGlyph)
-			if L[0] == "@" and rGroupName == L[7:] or rGroupName == Font.glyphForId_(L).name or Font.glyphForId_(L).name == thisGlyph.name:
+			if rGroupName == L[7:] or rGroupName == thisFont.glyphForId_(L).name or thisFont.glyphForId_(L).name == thisGlyph.name:
 				# for every R counterpart to L in the kerning pairs of rGroupName
-				for R in Font.kerning[masterID][L].keys():
-					if Font.kerning[masterID][L][R] != 0:
-						kernPair = "/%s/%s  " % (thisGlyphName, nameMaker(R))
-						editStringL += kernPair
+				for R in thisFont.kerning[masterID][L].keys():
+					if thisFont.kerning[masterID][L][R] != 0:
+						kernPairListL += [nameMaker(R, "right")]
 		except:
+			# print traceback.format_exc()
 			pass
 
-		for R in Font.kerning[masterID][L].keys():
+		for R in thisFont.kerning[masterID][L].keys():
 			try:
 				# if the R counterpart (class glyph) of L glyph is the selectedGlyph
-				if R[0] == "@" and lGroupName == R[7:] or lGroupName == Font.glyphForId_(R).name or Font.glyphForId_(R).name == thisGlyph.name:
-					if Font.kerning[masterID][L][R] != 0:
-						kernPair = "/%s/%s  " % (nameMaker(L), thisGlyphName)
-						editStringR += kernPair
+				if lGroupName == R[7:] or lGroupName == thisFont.glyphForId_(R).name or thisFont.glyphForId_(R).name == thisGlyph.name:
+					if thisFont.kerning[masterID][L][R] != 0:
+						kernPairListR += [nameMaker(L, "left")]
 			except:
 				pass
 
+	kernPairListSortedL = [g.name for g in Font.glyphs if g.name in kernPairListL]
+	for everyGlyph in kernPairListSortedL:
+		editStringL += "/%s/%s  " % (thisGlyphName, everyGlyph)
+
+	kernPairListSortedR = [g.name for g in Font.glyphs if g.name in kernPairListR]
+	for everyGlyph in kernPairListSortedR:
+		editStringR += "/%s/%s  " % (everyGlyph, thisGlyphName)
 
 editString = editStringL + "\n\n" + editStringR
-Glyphs.font.newTab(editString)
+
+thisFont.newTab(editString)
