@@ -26,10 +26,10 @@ Range.length = len(String)
 editString = """"""
 
 # Get the name of each selected glyph and insert a '/space\n/space' for new line character instead (/space added to slit this into it's own item)
-namesOfSelectedGlyphs = ''.join([ "/%s" % l.parent.name if l.parent.name else '/space\n/space' for l in selectedLayers ])
+namesOfSelectedGlyphs = ''.join([ "/%s" % l.parent.name if l.parent.name != "newGlyph" else '/space\n/space' for l in selectedLayers ])
 # namesOfSelectedGlyphs = ''.join([ "/%s" % l.parent.name for l in selectedLayers if hasattr(l.parent, 'name')])
 
-originalCharString = ''.join([ "/%s" % l.parent.name if l.parent.name else '\n' for l in selectedLayers ])
+originalCharString = ''.join([ "/%s" % l.parent.name if l.parent.name != "newGlyph" else '\n' for l in selectedLayers ])
 
 editList = namesOfSelectedGlyphs.split('/space')
 # Removed blank items which were added as a result of filtering out new line characters
